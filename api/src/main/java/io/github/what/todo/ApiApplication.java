@@ -1,12 +1,15 @@
 package io.github.what.todo;
 
-import io.github.what.todo.annotation.Generated;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@EnableJpaRepositories("io.github.what.todo.repository")
+@EntityScan("io.github.what.todo.entity")
 @SpringBootApplication
 @Log4j2
 public class ApiApplication extends SpringBootServletInitializer {
