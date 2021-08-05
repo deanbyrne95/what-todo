@@ -1,5 +1,6 @@
 package io.github.what.todo.repository;
 
+import io.github.what.todo.annotation.Generated;
 import io.github.what.todo.entity.Todo;
 import io.github.what.todo.entity.User;
 import io.github.what.todo.service.UserService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
@@ -14,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
 
+@Generated
 @Repository
 public class TodoRepository {
 
@@ -42,7 +45,7 @@ public class TodoRepository {
     private Todo mapTodo(ResultSet rs, int rowNum) throws SQLException {
         return new Todo(
                 rs.getLong("TODO_ID"),
-                this.userService.getUserById(rs.getLong("USER_ID")),
+                new User(rs.getLong("USER_ID"), "", "", "", "", new Date(12345L)),
                 rs.getString("TODO_TASK"),
                 this.getLocalDateTimeFromString(rs.getString("TODO_LAST_UPDATED")),
                 rs.getBoolean("TODO_IS_COMPLETED"),
